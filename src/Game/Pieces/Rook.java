@@ -1,6 +1,7 @@
 package Game.Pieces;
 
 import Game.Board;
+import Game.Square;
 
 import java.util.ArrayList;
 
@@ -18,33 +19,32 @@ public class Rook extends Piece {
     protected void calculateValidMoves() {
         validMoves = new ArrayList<>();
         int i = 1;
-        while (addValidMove(square.getX() + i, square.getY())) {
+        while (addValidMove(currentSquare.getX() + i, currentSquare.getY())) {
             i++;
         }
         i = 1;
-        while (addValidMove(square.getX() - i, square.getY())) {
+        while (addValidMove(currentSquare.getX() - i, currentSquare.getY())) {
             i++;
         }
         i = 1;
-        while (addValidMove(square.getX(), square.getY() + i)) {
+        while (addValidMove(currentSquare.getX(), currentSquare.getY() + i)) {
             i++;
         }
         i = 1;
-        while (addValidMove(square.getX(), square.getY() - i)) {
+        while (addValidMove(currentSquare.getX(), currentSquare.getY() - i)) {
             i++;
         }
-
     }
 
     private Boolean addValidMove(int x, int y) {
         if (board.isValidSquare(x, y) && board.getPieceTypeAtSquare(x, y) != colour && !isBlocked) {
             addValidMove(x, y);
-            if(board.getPieceTypeAtSquare(x,y)== Board.Colour.WHITE||board.getPieceTypeAtSquare(x,y)== Board.Colour.BLACK){
-                isBlocked=true;
+            if (board.getPieceTypeAtSquare(x, y) == Board.Colour.WHITE || board.getPieceTypeAtSquare(x, y) == Board.Colour.BLACK) {
+                isBlocked = true;
             }
             return true;
         } else {
-            isBlocked=false;
+            isBlocked = false;
             return false;
         }
     }

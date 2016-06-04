@@ -1,6 +1,6 @@
 package Game.Pieces;
+
 import Game.Board;
-import Game.Move;
 import Game.Square;
 
 import java.util.ArrayList;
@@ -10,15 +10,13 @@ import java.util.ArrayList;
  */
 public abstract class Piece {
 
-//    public enum Colour {WHITE, BLACK}
-
     public enum PieceType {PAWN, KNIGHT, BISHOP, ROOK, QUEEN, KING}
 
     protected int value;
     protected Board.Colour colour;
     protected PieceType pieceType;
     protected Board board;
-    protected Square square;
+    protected Square currentSquare;
 
     protected ArrayList<Square> validMoves;
 
@@ -42,20 +40,23 @@ public abstract class Piece {
         return pieceType;
     }
 
-    public void move(Square square){
-        if(isValid(square)){
-            this.square =square;
-        }
-    }
-
-    public ArrayList<Square> getValidMoves(){
+    public ArrayList<Square> getValidMoves() {
         calculateValidMoves();
         return validMoves;
     }
 
-    private Boolean isValid(Square move){
-        for(int i =0;i<validMoves.size();i++){
-            if(move==validMoves.get(i)){
+    public boolean move(Square end) {
+        if (!isValid(end)) {
+            return false;
+        }
+        board.movePiece(this.currentSquare, end, colour);
+        this.currentSquare = end;
+        return true;
+    }
+
+    protected Boolean isValid(Square move) {
+        for (int i = 0; i < validMoves.size(); i++) {
+            if (move == validMoves.get(i)) {
                 return true;
             }
         }

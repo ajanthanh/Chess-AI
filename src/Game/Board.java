@@ -2,6 +2,7 @@ package Game;
 
 import Game.Pieces.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,101 +53,108 @@ public class Board {
             return false;
         }
     }
+    public void movePiece(Square start, Square end, Colour colour){
+        pieceAtSquare.put(end,pieceAtSquare.get(start));
+        pieceAtSquare.remove(start);
+
+        pieceTypeAtSquare.get(start.getY()).set(start.getX(),Colour.NONE);
+        pieceTypeAtSquare.get(end.getY()).set(end.getX(),colour);
+    }
 
     private void setBoard() {
         for (int x = 0; x < 8; x++) {
-            Pawn pawn = new Pawn(Piece.Colour.WHITE, this);
+            Pawn pawn = new Pawn(Colour.WHITE, this);
             whitePieces.add(pawn);
             pieceAtSquare.put(new Square(x, 1), pawn);
             whitePieces.add(pawn);
         }
-        Rook rook = new Rook(Piece.Colour.WHITE, this);
+        Rook rook = new Rook(Colour.WHITE, this);
         whitePieces.add(rook);
         pieceAtSquare.put(new Square(0, 0), rook);
         whitePieces.add(rook);
-        rook = new Rook(Piece.Colour.WHITE, this);
+        rook = new Rook(Colour.WHITE, this);
         whitePieces.add(rook);
         pieceAtSquare.put(new Square(7, 0), rook);
         whitePieces.add(rook);
 
-        Knight knight = new Knight(Piece.Colour.WHITE, this);
+        Knight knight = new Knight(Colour.WHITE, this);
         whitePieces.add(knight);
         pieceAtSquare.put(new Square(1, 0), knight);
         whitePieces.add(knight);
-        knight = new Knight(Piece.Colour.WHITE, this);
+        knight = new Knight(Colour.WHITE, this);
         whitePieces.add(knight);
         pieceAtSquare.put(new Square(6, 0), knight);
         whitePieces.add(knight);
 
-        Bishop bishop = new Bishop(Piece.Colour.WHITE, this);
+        Bishop bishop = new Bishop(Colour.WHITE, this);
         whitePieces.add(bishop);
         pieceAtSquare.put(new Square(2, 0), bishop);
         whitePieces.add(bishop);
-        bishop = new Bishop(Piece.Colour.WHITE, this);
+        bishop = new Bishop(Colour.WHITE, this);
         whitePieces.add(bishop);
         pieceAtSquare.put(new Square(5, 0), bishop);
         whitePieces.add(bishop);
 
-        Queen queen = new Queen(Piece.Colour.WHITE, this);
+        Queen queen = new Queen(Colour.WHITE, this);
         whitePieces.add(queen);
         pieceAtSquare.put(new Square(3, 0), queen);
         whitePieces.add(queen);
 
-        King king = new King(Piece.Colour.WHITE, this);
+        King king = new King(Colour.WHITE, this);
         whitePieces.add(king);
         pieceAtSquare.put(new Square(4, 0), king);
         whitePieces.add(king);
 
         for (int x = 0; x < 8; x++) {
-            Pawn pawn = new Pawn(Piece.Colour.BLACK, this);
+            Pawn pawn = new Pawn(Colour.BLACK, this);
             whitePieces.add(pawn);
             pieceAtSquare.put(new Square(x, 6), pawn);
             blackPieces.add(pawn);
         }
-        rook = new Rook(Piece.Colour.BLACK, this);
+        rook = new Rook(Colour.BLACK, this);
         pieceAtSquare.put(new Square(0, 7), rook);
         blackPieces.add(rook);
-        rook = new Rook(Piece.Colour.BLACK, this);
+        rook = new Rook(Colour.BLACK, this);
         whitePieces.add(rook);
         pieceAtSquare.put(new Square(7, 7), rook);
         blackPieces.add(rook);
 
-        knight = new Knight(Piece.Colour.BLACK, this);
+        knight = new Knight(Colour.BLACK, this);
         whitePieces.add(knight);
         pieceAtSquare.put(new Square(0, 0), knight);
         blackPieces.add(knight);
-        knight = new Knight(Piece.Colour.BLACK, this);
+        knight = new Knight(Colour.BLACK, this);
         whitePieces.add(knight);
         pieceAtSquare.put(new Square(0, 0), knight);
         blackPieces.add(knight);
 
-        bishop = new Bishop(Piece.Colour.BLACK, this);
+        bishop = new Bishop(Colour.BLACK, this);
         whitePieces.add(bishop);
         pieceAtSquare.put(new Square(2, 0), bishop);
         blackPieces.add(bishop);
-        bishop = new Bishop(Piece.Colour.BLACK, this);
+        bishop = new Bishop(Colour.BLACK, this);
         whitePieces.add(bishop);
         pieceAtSquare.put(new Square(5, 0), bishop);
         blackPieces.add(bishop);
 
-        queen = new Queen(Piece.Colour.BLACK, this);
+        queen = new Queen(Colour.BLACK, this);
         whitePieces.add(queen);
         pieceAtSquare.put(new Square(3, 0), queen);
         blackPieces.add(queen);
 
-        king = new King(Piece.Colour.BLACK, this);
+        king = new King(Colour.BLACK, this);
         whitePieces.add(king);
         pieceAtSquare.put(new Square(4, 0), king);
         blackPieces.add(king);
     }
 
-    private int getScore(Piece.Colour colour) {
+    private int getScore(Colour colour) {
         int sum = 0;
-        if (colour == Piece.Colour.WHITE) {
+        if (colour == Colour.WHITE) {
             for (int i = 0; i < whitePieces.size(); i++) {
                 sum += whitePieces.get(i).getValue();
             }
-        } else if (colour == Piece.Colour.BLACK) {
+        } else if (colour == Colour.BLACK) {
             for (int i = 0; i < blackPieces.size(); i++) {
                 sum += blackPieces.get(i).getValue();
             }

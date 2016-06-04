@@ -16,19 +16,19 @@ public class Knight extends Piece {
     @Override
     protected void calculateValidMoves() {
         validMoves = new ArrayList<>();
-        addValidMove(square.getX()+1,square.getY()+2);
-        addValidMove(square.getX()-1,square.getY()+2);
-        addValidMove(square.getX()+1,square.getY()-2);
-        addValidMove(square.getX()-1,square.getY()-2);
-        addValidMove(square.getX()+2,square.getY()+1);
-        addValidMove(square.getX()-2,square.getY()+1);
-        addValidMove(square.getX()+2,square.getY()-1);
-        addValidMove(square.getX()-2,square.getY()-1);
+        addValidMove(currentSquare.getX() + 1, currentSquare.getY() + 2);
+        addValidMove(currentSquare.getX() - 1, currentSquare.getY() + 2);
+        addValidMove(currentSquare.getX() + 1, currentSquare.getY() - 2);
+        addValidMove(currentSquare.getX() - 1, currentSquare.getY() - 2);
+        addValidMove(currentSquare.getX() + 2, currentSquare.getY() + 1);
+        addValidMove(currentSquare.getX() - 2, currentSquare.getY() + 1);
+        addValidMove(currentSquare.getX() + 2, currentSquare.getY() - 1);
+        addValidMove(currentSquare.getX() - 2, currentSquare.getY() - 1);
     }
 
-    private void addValidMove(int x, int y){
-        if(board.isValidSquare(x,y) && board.getPieceTypeAtSquare(x,y)!= colour){
-            validMoves.add(new Square(x,y));
+    private void addValidMove(int x, int y) {
+        if (board.isValidSquare(x, y) && board.getPieceTypeAtSquare(x, y) != colour) {
+            validMoves.add(new Square(x, y));
         }
     }
 }
