@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class Rook extends Piece {
     private boolean isBlocked;
 
-    public Rook(Board.Colour colour, Board board) {
-        super(colour, board);
+    public Rook(Board.Colour colour, Board board, Square initialSquare) {
+        super(colour, board, initialSquare);
         value = 5;
         pieceType = PieceType.ROOK;
         isBlocked = false;

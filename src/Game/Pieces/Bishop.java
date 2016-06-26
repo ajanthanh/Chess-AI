@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class Bishop extends Piece {
     private Boolean isBlocked;
 
-    public Bishop(Board.Colour colour, Board board) {
-        super(colour, board);
+    public Bishop(Board.Colour colour, Board board, Square initialSquare) {
+        super(colour, board, initialSquare);
         value = 3;
         pieceType = PieceType.BISHOP;
         isBlocked = false;

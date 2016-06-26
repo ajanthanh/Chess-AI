@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class Queen extends Piece {
     Boolean isBlocked;
 
-    public Queen(Board.Colour colour, Board board) {
-        super(colour, board);
+    public Queen(Board.Colour colour, Board board, Square initialSquare) {
+        super(colour, board, initialSquare);
         value = 9;
         pieceType = PieceType.QUEEN;
         isBlocked = false;

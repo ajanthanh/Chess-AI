@@ -5,8 +5,8 @@ import Game.Square;
 
 public class King extends Piece {
 
-    public King(Board.Colour colour, Board board) {
-        super(colour, board);
+    public King(Board.Colour colour, Board board, Square initialSquare) {
+        super(colour, board, initialSquare);
         value = 0;
         pieceType = PieceType.KING;
     }

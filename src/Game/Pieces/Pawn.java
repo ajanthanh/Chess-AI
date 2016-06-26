@@ -13,8 +13,8 @@ public class Pawn extends Piece {
     private boolean hasMoved;
     private boolean canCaptureByEnPesant;
 
-    public Pawn(Board.Colour colour, Board board) {
-        super(colour, board);
+    public Pawn(Board.Colour colour, Board board, Square initialSquare) {
+        super(colour, board, initialSquare);
         value = 1;
         pieceType = PieceType.PAWN;
         isBlocked = false;

@@ -22,10 +22,11 @@ public abstract class Piece {
 
     protected abstract void calculateValidMoves();
 
-    Piece(Board.Colour colour, Board board) {
+    Piece(Board.Colour colour, Board board, Square initialSquare) {
         this.colour = colour;
         this.board = board;
         this.validMoves = new ArrayList<>();
+        this.currentSquare = initialSquare;
     }
 
     public int getValue() {
@@ -46,6 +47,7 @@ public abstract class Piece {
     }
 
     public boolean move(Square end) {
+        calculateValidMoves();
         if (!isValid(end)) {
             return false;
         }
@@ -56,10 +58,15 @@ public abstract class Piece {
 
     protected Boolean isValid(Square move) {
         for (int i = 0; i < validMoves.size(); i++) {
-            if (move == validMoves.get(i)) {
+            if (move.equals(validMoves.get(i))) {
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(pieceType + " : " + currentSquare.getX() + ", " + currentSquare.getY());
     }
 }

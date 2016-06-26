@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class Knight extends Piece {
 
-    public Knight(Board.Colour colour, Board board) {
-        super(colour, board);
+    public Knight(Board.Colour colour, Board board, Square initialSquare) {
+        super(colour, board, initialSquare);
         value = 3;
         pieceType = PieceType.KNIGHT;
     }

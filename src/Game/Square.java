@@ -16,4 +16,23 @@ public class Square {
     public int getY(){
         return square.getValue();
     }
+    public int hashCode(){
+        return square.getKey()*10 + square.getValue();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Square){
+            Square s = (Square)obj;
+            if(s.getX()==getX()&&s.getY()==getY()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("("+getX()+","+getY()+")");
+    }
 }
