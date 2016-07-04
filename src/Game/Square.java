@@ -33,6 +33,30 @@ public class Square {
 
     @Override
     public String toString() {
-        return String.format("("+getX()+","+getY()+")");
+        int y = getY()+1;
+        return String.format("("+getAlphaX()+","+y+")");
+    }
+
+    private String getAlphaX(){
+        switch (getX()){
+            case 0:
+                return "A";
+            case 1:
+                return "B";
+            case 2:
+                return "C";
+            case 3:
+                return "D";
+            case 4:
+                return "E";
+            case 5:
+                return "F";
+            case 6:
+                return "G";
+            case 7:
+                return "H";
+            default:
+                return "";
+        }
     }
 }

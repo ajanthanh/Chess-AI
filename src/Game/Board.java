@@ -54,6 +54,14 @@ public class Board {
         return pieceAtSquare.get(new Square(x, y));
     }
 
+    public ArrayList<Piece> getWhitePieces(){
+        return whitePieces;
+    }
+
+    public ArrayList<Piece> getBlackPieces(){
+        return blackPieces;
+    }
+
     public Boolean isValidSquare(int x, int y) {
         if (x >= 0 && x <= 7 && y >= 0 && y <= 7) {
             return true;

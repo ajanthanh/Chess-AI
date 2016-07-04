@@ -3,7 +3,7 @@ package Game.Pieces;
 import Game.Board;
 import Game.Square;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Created by ajanthan on 2016-05-04.
@@ -18,14 +18,14 @@ public abstract class Piece {
     protected Board board;
     protected Square currentSquare;
 
-    protected ArrayList<Square> validMoves;
+    protected HashSet<Square> validMoves;
 
     protected abstract void calculateValidMoves();
 
     Piece(Board.Colour colour, Board board, Square initialSquare) {
         this.colour = colour;
         this.board = board;
-        this.validMoves = new ArrayList<>();
+        this.validMoves = new HashSet<>();
         this.currentSquare = initialSquare;
     }
 
@@ -41,8 +41,12 @@ public abstract class Piece {
         return pieceType;
     }
 
-    public ArrayList<Square> getValidMoves() {
+    public HashSet<Square> getCalculatedValidMoves() {
         calculateValidMoves();
+        return validMoves;
+    }
+
+    public HashSet<Square> getValidMoves(){
         return validMoves;
     }
 
@@ -57,10 +61,8 @@ public abstract class Piece {
     }
 
     protected Boolean isValid(Square move) {
-        for (int i = 0; i < validMoves.size(); i++) {
-            if (move.equals(validMoves.get(i))) {
-                return true;
-            }
+        if(validMoves.contains(move)){
+            return true;
         }
         return false;
     }

@@ -4,6 +4,7 @@ import Game.Board;
 import Game.Square;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Knight extends Piece {
 
@@ -15,7 +16,7 @@ public class Knight extends Piece {
 
     @Override
     protected void calculateValidMoves() {
-        validMoves = new ArrayList<>();
+        validMoves = new HashSet<>();
         addValidMove(currentSquare.getX() + 1, currentSquare.getY() + 2);
         addValidMove(currentSquare.getX() - 1, currentSquare.getY() + 2);
         addValidMove(currentSquare.getX() + 1, currentSquare.getY() - 2);
