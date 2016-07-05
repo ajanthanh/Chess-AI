@@ -2,8 +2,8 @@ package Game.Pieces;
 
 import Game.Board;
 import Game.Square;
+import Helper.ValidationHelper;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Queen extends Piece {
@@ -55,7 +55,7 @@ public class Queen extends Piece {
     }
 
     private Boolean addValidMove(int x, int y) {
-        if (board.isValidSquare(x, y) && board.getPieceTypeAtSquare(x, y) != colour && !isBlocked) {
+        if (ValidationHelper.isValidSquare(x, y) && board.getPieceTypeAtSquare(x, y) != colour && !isBlocked) {
             validMoves.add(new Square(x, y));
             if (board.getPieceTypeAtSquare(x, y) != Board.Colour.WHITE || board.getPieceTypeAtSquare(x, y) != Board.Colour.BLACK) {
                 isBlocked = true;

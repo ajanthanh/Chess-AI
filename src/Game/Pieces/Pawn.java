@@ -2,6 +2,8 @@ package Game.Pieces;
 
 import Game.Board;
 import Game.Square;
+import Helper.ValidationHelper;
+
 import java.util.HashSet;
 
 /**
@@ -34,7 +36,7 @@ public class Pawn extends Piece {
             enenmyColour = Board.Colour.WHITE;
         }
         // Can move up one
-        if (board.isValidSquare(currentSquare.getX(), currentSquare.getY() + direction)
+        if (ValidationHelper.isValidSquare(currentSquare.getX(), currentSquare.getY() + direction)
                 && board.getPieceTypeAtSquare(currentSquare.getX(), currentSquare.getY() + direction) == Board.Colour.NONE) {
             validMoves.add(new Square(currentSquare.getX(), currentSquare.getY() + direction));
             isBlocked = false;
@@ -42,17 +44,17 @@ public class Pawn extends Piece {
             isBlocked = true;
         }
         // Capture Piece to front right
-        if (board.isValidSquare(currentSquare.getX() + 1, currentSquare.getY() + direction) &&
+        if (ValidationHelper.isValidSquare(currentSquare.getX() + 1, currentSquare.getY() + direction) &&
                 board.getPieceTypeAtSquare(currentSquare.getX() + direction, currentSquare.getY() + direction) == enenmyColour) {
             validMoves.add(new Square(currentSquare.getX() + direction, currentSquare.getY() + 1));
         }
         // Capture Piece to front left
-        if (board.isValidSquare(currentSquare.getX() - 1, currentSquare.getY() + direction) &&
+        if (ValidationHelper.isValidSquare(currentSquare.getX() - 1, currentSquare.getY() + direction) &&
                 board.getPieceTypeAtSquare(currentSquare.getX() - 1, currentSquare.getY() + direction) == enenmyColour) {
             validMoves.add(new Square(currentSquare.getX() - 1, currentSquare.getY() + direction));
         }
         if (!hasMoved && !isBlocked) {
-            if (board.isValidSquare(currentSquare.getX(), currentSquare.getY() + 2*direction)
+            if (ValidationHelper.isValidSquare(currentSquare.getX(), currentSquare.getY() + 2*direction)
                     && board.getPieceTypeAtSquare(currentSquare.getX(), currentSquare.getY() + 2*direction) == Board.Colour.NONE) {
                 validMoves.add(new Square(currentSquare.getX(), currentSquare.getY() + 2*direction));
             }

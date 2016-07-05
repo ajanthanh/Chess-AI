@@ -1,8 +1,8 @@
 package Game;
 
 import Game.Pieces.*;
+import Helper.PieceHelper;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +38,7 @@ public class Board {
             }
             pieceTypeAtSquare.add(row);
         }
-        setBoard();
+        setDefaultBoard();
     }
 
     public Colour getPieceTypeAtSquare(int x, int y) {
@@ -62,14 +62,6 @@ public class Board {
         return blackPieces;
     }
 
-    public Boolean isValidSquare(int x, int y) {
-        if (x >= 0 && x <= 7 && y >= 0 && y <= 7) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public void movePiece(Square start, Square end, Colour colour) {
         pieceAtSquare.put(end, pieceAtSquare.get(start));
         pieceAtSquare.remove(start);
@@ -78,7 +70,7 @@ public class Board {
         pieceTypeAtSquare.get(end.getY()).set(end.getX(), colour);
     }
 
-    private void setBoard() {
+    private void setDefaultBoard() {
         for (int x = 0; x < 8; x++) {
             Pawn pawn = new Pawn(Colour.WHITE, this, new Square(x, 1));
             pieceAtSquare.put(new Square(x, 1), pawn);
@@ -146,6 +138,16 @@ public class Board {
         king = new King(Colour.BLACK, this, new Square(4, 7));
         pieceAtSquare.put(new Square(4, 7), king);
         blackPieces.add(king);
+    }
+
+    public void addPiece(Colour colour, Piece.PieceType type, int x , int y){
+        Piece piece = PieceHelper.makePiece(colour,type,this,x,y);
+        pieceAtSquare.put(new Square(x,y),piece);
+        if(colour == Colour.BLACK){
+            blackPieces.add(piece);
+        }else{
+            whitePieces.add(piece);
+        }
     }
 
     private int getScore(Colour colour) {

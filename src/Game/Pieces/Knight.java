@@ -2,8 +2,8 @@ package Game.Pieces;
 
 import Game.Board;
 import Game.Square;
+import Helper.ValidationHelper;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Knight extends Piece {
@@ -28,7 +28,7 @@ public class Knight extends Piece {
     }
 
     private void addValidMove(int x, int y) {
-        if (board.isValidSquare(x, y) && board.getPieceTypeAtSquare(x, y) != colour) {
+        if (ValidationHelper.isValidSquare(x, y) && board.getPieceTypeAtSquare(x, y) != colour) {
             validMoves.add(new Square(x, y));
         }
     }
