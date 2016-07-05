@@ -19,26 +19,16 @@ public class Board {
     private ArrayList<Piece> whitePieces;
     private ArrayList<Piece> blackPieces;
 
-    public Board() {
+    public Board(boolean setupDefault) {
         pieceAtSquare = new HashMap<>();
         pieceTypeAtSquare = new ArrayList<>();
         whitePieces = new ArrayList<>();
         blackPieces = new ArrayList<>();
-        for (int y = 0; y < 8; y++) {
-            ArrayList<Colour> row = new ArrayList<>();
-            for (int x = 0; x < 8; x++) {
-                if (y == 0 || y == 1) {
-                    row.add(Colour.WHITE);
-                } else if (y == 6 || y == 7) {
-                    row.add(Colour.BLACK);
-                } else {
-                    row.add(Colour.NONE);
-                }
-                pieceAtSquare.put(new Square(x, y), null);
-            }
-            pieceTypeAtSquare.add(row);
+        if(setupDefault) {
+            setDefaultBoard();
+        }else{
+            setupBlank();
         }
-        setDefaultBoard();
     }
 
     public Colour getPieceTypeAtSquare(int x, int y) {
@@ -70,7 +60,33 @@ public class Board {
         pieceTypeAtSquare.get(end.getY()).set(end.getX(), colour);
     }
 
+    private void setupBlank() {
+        for (int y = 0; y < 8; y++) {
+            ArrayList<Colour> row = new ArrayList<>();
+            for (int x = 0; x < 8; x++) {
+                row.add(Colour.NONE);
+                pieceAtSquare.put(new Square(x, y), null);
+            }
+            pieceTypeAtSquare.add(row);
+        }
+    }
+
     private void setDefaultBoard() {
+        for (int y = 0; y < 8; y++) {
+            ArrayList<Colour> row = new ArrayList<>();
+            for (int x = 0; x < 8; x++) {
+                if (y == 0 || y == 1) {
+                    row.add(Colour.WHITE);
+                } else if (y == 6 || y == 7) {
+                    row.add(Colour.BLACK);
+                } else {
+                    row.add(Colour.NONE);
+                }
+                pieceAtSquare.put(new Square(x, y), null);
+            }
+            pieceTypeAtSquare.add(row);
+        }
+
         for (int x = 0; x < 8; x++) {
             Pawn pawn = new Pawn(Colour.WHITE, this, new Square(x, 1));
             pieceAtSquare.put(new Square(x, 1), pawn);
@@ -143,6 +159,7 @@ public class Board {
     public void addPiece(Colour colour, Piece.PieceType type, int x , int y){
         Piece piece = PieceHelper.makePiece(colour,type,this,x,y);
         pieceAtSquare.put(new Square(x,y),piece);
+        pieceTypeAtSquare.get(y).set(x,colour);
         if(colour == Colour.BLACK){
             blackPieces.add(piece);
         }else{
@@ -162,5 +179,20 @@ public class Board {
             }
         }
         return sum;
+    }
+
+    @Override
+    public String toString() {
+        for(int y=7;y>=0;y--){
+            for(int x=0;x<8;x++){
+                if(pieceTypeAtSquare.get(y).get(x)==Colour.NONE){
+                    System.out.print("-- ");
+                }else{
+                    System.out.print(pieceAtSquare.get(new Square(x,y)).toString()+" ");
+                }
+            }
+            System.out.println("");
+        }
+        return "";
     }
 }

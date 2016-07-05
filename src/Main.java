@@ -19,7 +19,7 @@ public class Main{
 //                int x2 = reader.nextInt();
 //                int y2 = reader.nextInt();
 //                board.getPieceAtSquare(x1, y1).move(new Square(x2, y2));
-//                System.out.println(board.getPieceAtSquare(x2, y2).getCalculatedValidMoves().toString());
+//                System.out.println(board.getPieceAtSquare(x2, y2).getCalculatedValidMoves().toStringDebug());
 //            }catch(Exception e){
 //                System.out.println("Invalid Move");
 //            }

@@ -46,7 +46,7 @@ public abstract class Piece {
         return validMoves;
     }
 
-    public HashSet<Square> getValidMoves(){
+    public HashSet<Square> getValidMoves() {
         return validMoves;
     }
 
@@ -61,14 +61,39 @@ public abstract class Piece {
     }
 
     protected Boolean isValid(Square move) {
-        if(validMoves.contains(move)){
+        if (validMoves.contains(move)) {
             return true;
         }
         return false;
     }
 
+    public String toStringDebug() {
+        return String.format(pieceType + " : " + currentSquare.getX() + ", " + currentSquare.getY());
+    }
+
     @Override
     public String toString() {
-        return String.format(pieceType + " : " + currentSquare.getX() + ", " + currentSquare.getY());
+        String colourCode="";
+        if(colour== Board.Colour.BLACK){
+            colourCode="B";
+        }else if(colour == Board.Colour.WHITE){
+            colourCode="W";
+        }
+
+        if (pieceType == PieceType.KING) {
+            return colourCode+"K";
+        } else if (pieceType == PieceType.QUEEN) {
+            return colourCode+"Q";
+        } else if (pieceType == PieceType.ROOK) {
+            return colourCode+"R";
+        } else if (pieceType == PieceType.BISHOP) {
+            return colourCode+"B";
+        } else if (pieceType == PieceType.KNIGHT) {
+            return colourCode+"N";
+        } else if (pieceType == PieceType.PAWN) {
+            return colourCode+"P";
+        } else {
+            return "";
+        }
     }
 }

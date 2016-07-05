@@ -15,7 +15,7 @@ public class Puzzle {
 
     public Puzzle() {
         System.out.println("Puzzle Module");
-        Board board = new Board();
+        board = new Board(false);
         isInputComplete = false;
         setup();
     }
@@ -26,14 +26,20 @@ public class Puzzle {
         //Todo exit upon reading "D"
         while (true) {
             String colourCode = reader.next();
+            //Temporary Hack
+            if(colourCode.toUpperCase().equals("D")){
+                break;
+            }
             String pieceCode = reader.next();
             int x = reader.nextInt();
             int y = reader.nextInt();
             if (ValidationHelper.isValidInput(colourCode, pieceCode, x, y) && ValidationHelper.isValidSquare(x, y)) {
                 board.addPiece(PieceHelper.getColourFromCode(colourCode), PieceHelper.getPieceFromCode(pieceCode), x, y);
+            }else{
+                System.out.println("Invalid Piece Placement");
             }
         }
-        System.out.println("Finished Entering Pieces");
+        System.out.println(board.toString());
     }
 
 }
